@@ -47,7 +47,7 @@ Incidents Dataset (mass_killing_incidents_public.csv):
 
 -   Weapon Details: if_assault_rifle_used (whether an assault rifle was used)
 
--    Narrative: narrative (provides additional context in free text)
+-   Narrative: narrative (provides additional context in free text)
 
 Offenders Dataset (mass_killing_offenders_public.csv):
 
@@ -55,9 +55,9 @@ Offenders Dataset (mass_killing_offenders_public.csv):
 
 -   Demographics: age, race, sex
 
--    Outcomes: suicide (whether the offender committed suicide), deathcause (cause of death), outcome (legal or fatality outcome)
+-   Outcomes: suicide (whether the offender committed suicide), deathcause (cause of death), outcome (legal or fatality outcome)
 
--    Criminal Justice Process: criminal_justice_process, sentence_type, sentence_details
+-   Criminal Justice Process: criminal_justice_process, sentence_type, sentence_details
 
 Victims Dataset (mass_killing_victims_public.csv):
 
@@ -95,7 +95,7 @@ To identify patterns in the frequency, severity, and geographical spread of mass
 
 -   Geographic variables: State, city, incident area .
 
--    Outcome variables: Number of fatalities, number of injuries.
+-   Outcome variables: Number of fatalities, number of injuries.
 
 ***Analytical Steps:***
 
@@ -107,21 +107,45 @@ To identify patterns in the frequency, severity, and geographical spread of mass
 
 -   Line Charts: For trend analysis of annual fatalities and injuries.
 
--    Heatmaps: To show incidents by day of the week or by month, which can highlight high-incident periods.
+-   Heatmaps: To show incidents by day of the week or by month, which can highlight high-incident periods.
 
 -   Geographic Maps: Use ggplot2 with sf or maps package to plot incident locations and highlight areas with the highest frequency.
 
-***2.Does the number of votes have a different effect on the IMDb rating on episodes with high or low ratings?***
+***2.Which shooter characteristics—such as demographics, mental health status, age, employment, and weapon acquisition method—correlate with the severity and frequency of mass shootings?***
 
-**Variables:** IMDB_rating, total_votes
+**Objective:**
 
-**Approach:** Divide episodes to see if it receives above median IMDb rating and below median IMDb rating, followed by investigating whether or not the relationship between votes and ratings differ between these two groups.
+To identify whether specific shooter attributes are linked to higher incident severity (e.g., greater fatalities or injuries).
 
-**Scatter Plot with Facets:** Split it into two – make a scatter for episodes with more votes highest in the y-axis and a scatter for episodes with lower votes lowest in the y-axis.
+**Approach:**
 
-**Facet Grid:** One should utilize a facet grid and represent these two groups in one figure.
+-   Data: mass_killing_offenders_public.csv and potentially joining with mass_killing_incidents_public.csv based on incident ID.
 
-**Objective:** This will allow us to see whether high vote episodes, positively skewed, make a difference on highly rated episodes compared to lowly rated ones.
+**Variables:**
+
+-   Demographics: Age, gender, race.
+
+-   Mental Health Status: Indicator of any reported mental health issues.
+
+-   Employment: Employment status at the time of the incident.
+
+-   Weapon Acquisition Method: Legal or illegal acquisition status.
+
+-   Outcome variables: Incident severity, such as total fatalities and injuries.
+
+**Analytical Steps:**
+
+-   Filter and group data based on shooter attributes, analyzing each characteristic individually and in combination.
+
+-   Calculate the average incident severity for each characteristic category.Explore correlation between shooter attributes and severity metrics.
+
+**Visualizations:**
+
+-   Box Plots: To show the distribution of fatalities and injuries across different demographic categories.
+
+-   Correlation Plots: Using the corrplot package to visualize correlations among numerical variables (e.g., age, number of weapons).
+
+-   Density Plots: To show the distribution of fatalities and injuries by weapon acquisition status.
 
 ***3.Are there any seasons that have more episodes, and does this Sometimes, it is observed that such seasons receive higher ratings on average?***
 
@@ -157,13 +181,13 @@ Our next question is about the correlation between the total number of episodes 
 
 ## Analysis plan
 
-| **Task Name** | **Status** | **Assignee** | **Due Date** | **Priority** | **Summary** |
+| **Task Name**                             | **Status**  | **Assignee** | **Due Date** | **Priority** | **Summary**                                                                                                                                                       |
 |:-----------|:-----------|:-----------|------------|:-----------|:-----------|
-| **Data Cleaning & Preparation** | In Progress | Swetha | 09/18/2024 | High | Clean data (remove missing values, format dates, standardize variables like zord_type). |
-| **Exploratory Data Analysis (EDA)** | Pending | Naveen | 09/25/2024 | High | Explore basic statistics and distributions of Zord types, villain motivations, etc. |
-| **IMDb Ratings Evolution Over Time** | Pending | Aman | 09/30/2024 | Moderate | Analyze how IMDb ratings have changed across different eras of Power Rangers. Use line plots to compare ratings across early, middle, and modern seasons. |
-| **Effect of Total Votes on IMDb Ratings** | Pending | Krishna | 10/01/2024 | Moderate | Explore whether the number of votes impacts IMDb ratings differently for high-rated and low-rated episodes. Use scatter plots with facets to visualize this. |
-| **Episode Count vs. Average IMDb Rating** | Pending | Swetha | 10/01/2024 | Moderate | Investigate whether seasons with more episodes tend to have higher or lower IMDb ratings. Use a bar plot for episode counts and a line plot for average ratings. |
-| **Seasonal Variation in IMDb Ratings** | Pending | Naveen | 10/01/2024 | Moderate | Compare the variability of IMDb ratings across seasons to determine if some seasons are more consistent than others. Use bar plots with error bars and box plots. |
-| **Visualization Creation & Refinement** | Pending | Aman | 10/05/2024 | High | Refine all visualizations to create compelling, story-driven narratives. |
-| **Report Writing** | Pending | Krishna | 10/05/2024 | High | Compile findings into a cohesive report with visualizations and conclusions. |
+| **Data Cleaning & Preparation**           | In Progress | Swetha       | 09/18/2024   | High         | Clean data (remove missing values, format dates, standardize variables like zord_type).                                                                           |
+| **Exploratory Data Analysis (EDA)**       | Pending     | Naveen       | 09/25/2024   | High         | Explore basic statistics and distributions of Zord types, villain motivations, etc.                                                                               |
+| **IMDb Ratings Evolution Over Time**      | Pending     | Aman         | 09/30/2024   | Moderate     | Analyze how IMDb ratings have changed across different eras of Power Rangers. Use line plots to compare ratings across early, middle, and modern seasons.         |
+| **Effect of Total Votes on IMDb Ratings** | Pending     | Krishna      | 10/01/2024   | Moderate     | Explore whether the number of votes impacts IMDb ratings differently for high-rated and low-rated episodes. Use scatter plots with facets to visualize this.      |
+| **Episode Count vs. Average IMDb Rating** | Pending     | Swetha       | 10/01/2024   | Moderate     | Investigate whether seasons with more episodes tend to have higher or lower IMDb ratings. Use a bar plot for episode counts and a line plot for average ratings.  |
+| **Seasonal Variation in IMDb Ratings**    | Pending     | Naveen       | 10/01/2024   | Moderate     | Compare the variability of IMDb ratings across seasons to determine if some seasons are more consistent than others. Use bar plots with error bars and box plots. |
+| **Visualization Creation & Refinement**   | Pending     | Aman         | 10/05/2024   | High         | Refine all visualizations to create compelling, story-driven narratives.                                                                                          |
+| **Report Writing**                        | Pending     | Krishna      | 10/05/2024   | High         | Compile findings into a cohesive report with visualizations and conclusions.                                                                                      |

@@ -213,11 +213,31 @@ Data: mass_killing_incidents_public.csv and mass_killing_offenders_public.csv. O
 
 | **Task Name**                             | **Status**  | **Assignee** | **Due Date** | **Priority** | **Summary**                                                                                                                                                       |
 |:-----------|:-----------|:-----------|------------|:-----------|:-----------|
-| **Data Cleaning & Preparation**           | In Progress | Swetha       | 09/18/2024   | High         | Clean data (remove missing values, format dates, standardize variables like zord_type).                                                                           |
-| **Exploratory Data Analysis (EDA)**       | Pending     | Naveen       | 09/25/2024   | High         | Explore basic statistics and distributions of Zord types, villain motivations, etc.                                                                               |
-| **IMDb Ratings Evolution Over Time**      | Pending     | Aman         | 09/30/2024   | Moderate     | Analyze how IMDb ratings have changed across different eras of Power Rangers. Use line plots to compare ratings across early, middle, and modern seasons.         |
-| **Effect of Total Votes on IMDb Ratings** | Pending     | Krishna      | 10/01/2024   | Moderate     | Explore whether the number of votes impacts IMDb ratings differently for high-rated and low-rated episodes. Use scatter plots with facets to visualize this.      |
-| **Episode Count vs. Average IMDb Rating** | Pending     | Swetha       | 10/01/2024   | Moderate     | Investigate whether seasons with more episodes tend to have higher or lower IMDb ratings. Use a bar plot for episode counts and a line plot for average ratings.  |
-| **Seasonal Variation in IMDb Ratings**    | Pending     | Naveen       | 10/01/2024   | Moderate     | Compare the variability of IMDb ratings across seasons to determine if some seasons are more consistent than others. Use bar plots with error bars and box plots. |
-| **Visualization Creation & Refinement**   | Pending     | Aman         | 10/05/2024   | High         | Refine all visualizations to create compelling, story-driven narratives.                                                                                          |
-| **Report Writing**                        | Pending     | Krishna      | 10/05/2024   | High         | Compile findings into a cohesive report with visualizations and conclusions.                                                                                      |
+| **Focus Selection**           | Completed | Swetha       | 11/10/2024   | High         | Select the core focus and scope of the project, identifying research questions and data needs.                                                                           |Whole Team    | 11/13/2024   | High         | Draft initial project proposal, outlining research questions, datasets, and methods.                                                                               |
+| **Repository Setup**      | Completed     | Whole Team   | 11/13/2024   | High     | Set up project structure in the repository, preparing for data analysis and documentation.         
+|
+| **Proposal Finalization** | In Progress     | Hema      | 11/13/2024   | High     | Finalize the project proposal based on peer review feedback and refine research questions if needed.      
+|
+| **Data Preparation** | Pending     | Aman       | 11/15/2024   | High     | Import, clean, and preprocess each dataset. Check for missing values, duplicates, and ensure linkages via incident_id.  
+|
+| **Exploratory Data Analysis (EDA)**    | Pending     | Hema       | 11/07/2024   | High     | Conduct initial EDA to understand distributions and relationships within each dataset. Generate summary statistics for key variables.
+|
+| **Trends Over Time & Geography**   | Pending     | Aman         | 11/21/2024   | Moderate         | Analyze trends in incidents, fatalities, and injuries by year and location. Create heatmaps, geographic maps, and time series plots.                                                                                          |
+| **Shooter Characteristics Analysis**     | Pending     | Swetha      | 11/23/2024   | Moderate         | Compile findings into a cohesive report with visualizations and conclusions.                                                                                      |
+| **Temporal Patterns Analysis**     | Pending     | Hema      | 11/25/2024   | Moderate         | Identify patterns by time, including day, month, and seasonality in mass shootings. Use line charts and heatmaps for visualization.
+|
+| **Victim-Shooter Relationship Analysis**     | Pending     | Aman      | 11/26/2024   | Low         | Low	Link victims and offenders to study the impact of victim-offender relationships on incident severity. Display results in stacked bar charts.                                                                                      |
+| **Weapon Usage Analysis**     | Pending     | Aman      | 11/26/2024   | High         | Analyze weapon types and their association with incident outcomes. Create box plots or violin plots by weapon type for fatalities and injuries.
+|
+| **Narrative Text Analysis (NLP)**     | Pending     | Swetha     | 11/28/2024   | High         | Use text analysis on narrative descriptions to identify common themes or motivations. Apply sentiment analysis or keyword extraction with tidytext.
+|
+| **Predictive Modeling**     | Pending     | Swetha     | 12/01/2024   | Moderate         | Build a model predicting incident severity based on offender demographics and weapon details. Visualize using ROC curves and variable importance plots.
+|
+| **Data Visualization**     | Pending     | Hema     | 12/05/2024   | High       | Create visualizations for each analysis, including interactive maps, trend lines, heatmaps, and word clouds for presentation and final report.
+|
+| **Novel Element Implementation**     | Pending     | Hema     | 12/07/2024   | High       | Integrate a novel project element, such as a shiny app or 3D visualization, as a self-learned aspect.
+|
+| **Report Writing & Documentation**     | Pending     | Aman     | 12/10/2024   | Moderate       | Compile a report summarizing project goals, methods, and findings. Document new methods or packages introduced for this analysis.
+|
+| **Final Review & Submission**     | Pending     | Whole team     | 12/12/2024   | High       | Review all components, finalize visualizations and documentation, and prepare the project for final submission and presentation.
+|

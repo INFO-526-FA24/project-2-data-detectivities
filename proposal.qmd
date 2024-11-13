@@ -8,18 +8,7 @@ author:
       
 Description: "
 The data we are going to work with for this project is taken from the
-tidy tuesday Power Rangers Dataset. It contains data about series, shows
-season title, number of the episode, air date, descriptions of the
-episodes and their ratings on IMDb site. The dataset covers the entire
-Power Rangers series of which was first produced in 1993 and has become
-a production with series, movies and spin off all across the world.
-
-All in all this show is full of cultural references and has been a
-diverse show that has grown with the times and with society. Thanks to
-the dataset, it is possible to analyse not only the performativity of
-the episodes but also the changes in the storytelling, the character
-building processes, and the main topics during the existence of the
-show."
+ti."
 format:
   html:
     code-tools: true

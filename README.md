@@ -1,2 +1,3 @@
-# project-2-data-detectivities
-project-2-data-detectivities created by GitHub Classroom
+# project-2-data-detectives
+project-2-data-detectives 
+

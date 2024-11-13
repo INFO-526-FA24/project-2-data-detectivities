@@ -147,23 +147,33 @@ To identify whether specific shooter attributes are linked to higher incident se
 
 -   Density Plots: To show the distribution of fatalities and injuries by weapon acquisition status.
 
-***3.Are there any seasons that have more episodes, and does this Sometimes, it is observed that such seasons receive higher ratings on average?***
-
-**Approach for Analysis:**
-
-**Numerical Variables:** episode_num (The number of the episode) IMDB_rating( IMDb rating)
-
-**Categorical Variable:** season_title (Season title)
+***3.Are there specific temporal patterns in mass shootings (e.g., by day, week, or month) that could provide insights for prediction models or public safety measures?***
 
 **Objective:**
 
-Our next question is about the correlation between the total number of episodes per season and the IMDb rating of the respective seasons. More particularly, the following research question has been formulated as follows: Do shows that broadcast more episodes per season compute higher or lower average IMDb ratings per episode?
+-   To discover any patterns in the timing of incidents that might indicate high-risk periods.
 
-**Graphs to Use:**
+***Approach:***
 
-**Bar Plot for Episode Count**: A bar plot of the episodes per season will then give a general feel of which season is more episodes hence is longer.
+Data: mass_killing_incidents_public.csv.
 
-**Line Plot for Average IMDb Rating:** On top of the bar plot, line plot is intended to represent the mean of the IMDb rating for each season. It will also assist us make a direct comparison on the number of episodes and the average ratings obtained for each series.
+**Variables:**
+
+-   Date and Time: Year, month, day of week, and potentially the time of day.
+
+-    Outcome variables: Number of incidents, number of fatalities and injuries.
+
+**Analytical Steps:**
+
+-   Aggregate data by month, day of week, and time to find any consistent patterns in incident timing. Perform time series analysis, if applicable, to identify seasonality or trends.
+
+**Visualizations:**
+
+-   Time Series Line Graphs: Using ggplot2 to visualize monthly incident rates and incident severity over time.
+
+-   Heatmaps: To visualize incidents by weekday and month.
+
+-   Polar Bar Plots: Using the plotly package to plot incidents by time in a circular format to highlight day/night patterns.
 
 ***4.Do Certain Seasons Have Higher Variation in IMDb Ratings?***
 

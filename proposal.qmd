@@ -175,19 +175,39 @@ Data: mass_killing_incidents_public.csv.
 
 -   Polar Bar Plots: Using the plotly package to plot incidents by time in a circular format to highlight day/night patterns.
 
-***4.Do Certain Seasons Have Higher Variation in IMDb Ratings?***
+***4. How do external factors, such as shooter motivation and state-level variables (e.g., gun ownership rates), affect the nature of mass shootings?
 
-**Variables:** season_title, IMDB_rating
+**Objective:**
 
-**Approach:** Compare the fluctuation in IMDb ratings of each season by calculating the standard deviation to find which the seasons have a greater variability or some episodes are considerably better or worse than others.
+-   To determine how motivations (e.g., terrorism, hate crimes) or external state-level factors might influence incident characteristics.
 
-**Visualization:**
+***Approach:***
 
-**Bar Plot with Error Bars:** Time series the mean IMDb rating for each of the seasons and standard error of the mean (variability).
+Data: mass_killing_incidents_public.csv and mass_killing_offenders_public.csv. Optionally, integrate external datasets for state-level factors.
 
-**Box Plot:** It also can be applied to show quantitatively the variability of ratings across the seasons of the show.
+**Variables:**
 
-**Objective:** This can show if potentially some seasons are more homogenised in terms of rating, or if perhaps a couple of particular seasons are either extremely high, or extremely low rated.
+-   Motivations: Shooter’s motivation (e.g., terrorism, hate crime).
+-    External Factors: Use additional datasets for state-level variables like gun ownership rates.
+-    Outcome variables: Incident characteristics such as severity, location, and frequency.
+
+
+**Analytical Steps:**
+
+-   Analyze how different motivations correlate with the incident's severity and frequency.For state-level analysis, link incident data with state-level metrics, looking for correlations.
+
+**Visualizations:**
+
+-   Bar Charts: To compare incident severity by motivation category.
+
+-   Choropleth Maps: Map incidents by state, overlaying state gun ownership or other metrics.
+
+-   Bubble Charts: To show incidents based on both motivation and severity, with bubble size reflecting fatalities.
+
+**NOTE: Variable and visualization may change while developing the project.**
+
+
+
 
 ## Analysis plan
 

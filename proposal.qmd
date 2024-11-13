@@ -1,0 +1,160 @@
+---
+title: "Analysis of USA Mass Shootings"
+subtitle: "Uncovering Trends and Insights for a Safer Future"
+author: 
+  - name: "Data Detectivities""
+    affiliations:
+      - name: "College of Information Science, University of Arizona"
+      
+Description: "
+The data we are going to work with for this project is taken from the
+tidy tuesday Power Rangers Dataset. It contains data about series, shows
+season title, number of the episode, air date, descriptions of the
+episodes and their ratings on IMDb site. The dataset covers the entire
+Power Rangers series of which was first produced in 1993 and has become
+a production with series, movies and spin off all across the world.
+
+All in all this show is full of cultural references and has been a
+diverse show that has grown with the times and with society. Thanks to
+the dataset, it is possible to analyse not only the performativity of
+the episodes but also the changes in the storytelling, the character
+building processes, and the main topics during the existence of the
+show."
+format:
+  html:
+    code-tools: true
+    code-overflow: wrap
+    code-line-numbers: true
+    embed-resources: true
+editor: visual
+code-annotations: hover
+execute:
+  warning: false
+---
+
+## Dataset
+
+```{r}
+#| label: load-pkgs
+#| message: false
+# Load packages
+
+# Check and install necessary packages
+check_and_install("tidyverse")
+check_and_install("dplyr")
+
+
+file_path = "data/power_rangers_episodes.csv"
+
+rangers = read.csv(file = file_path)
+
+# Display basic information about the dataset
+dim(rangers)  
+glimpse(rangers)  
+summary(rangers) 
+```
+
+A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
+
+Make sure to load the data and use inline code for some of this information.'
+
+**Dataset Description:**
+
+The dataset consists of various key attributes:
+
+**Season Title**: Name of the season .
+
+**Episode Number**: The chronological number of the episode within the season.
+
+**Episode Title**: Name of the episode.
+
+**Air Date**: Date the episode was first broadcast.
+
+**IMDb Rating**: The rating of the episode as voted by users on IMDb.
+
+**Total Votes**: The number of votes the episode received.
+
+**Description**: A brief synopsis of the episode's plot.
+
+***Reason for choosing the dataset:***
+
+The Power Rangers are heroes in brightly colored costumes who fights evil; they embody the values of togetherness, ethnic and racial diversity and integrity, and have become a beloved children's franchise for over three decades. For choosing this particular dataset we want to reveal the evolution of the action-packed show and how it became very much a part of many generations.\
+\
+What we have to explore is what is the fundamental story that has been sustaining this franchise for the past few decades. We very much like to delve into the subtext with rainbows, sparkles and high kicks -- what Power Rangers really explains is the importance of friendship, togetherness and conquering one's fears. Most importantly, it would be interesting to find out what roles and positions the heroes have shifted to, what positions have been accentuated in new storylines; whether it is possible to speak about the continuity of such narrative themes as the theme of mentorship, sacrifice, or leadership.\
+\
+In other words, we desire to know why Power Rangers is still going strong after many seasons. That's what continues to attract the viewership? I think that is an interesting question to pose when analyzing four different heroes in this case -- Batman, Superman, Wonder Woman and Aquaman -- because one could argue that all of these heroes have gone through some form of development. What did the franchise remember and what did it learn -- those values which have remained forever relevant, and what new values the franchise got while adapting to the world of the twenty-first century?
+
+## Questions and Analysis plan
+
+The two questions you want to answer.
+
+***1.In what ways does rating on IMDb change from one era of Power Rangers to another?***
+
+**Variables**: air date, IMDB rating, title of the season
+
+**Approach:** Categorize the episodes into the first five seasons, middle seasons, and the latter seasons, then, compare the ratings from IMDb over such season sections.
+
+**Visualization:**
+
+**Line Plot:** Graph facilities the ratings obtained from IMDb with different colors concerning each era of Power Rangers.
+
+**Annotations:** Use squiggly lines to signify that there is something of importance to come such as new characters or new formats.
+
+**Objective:** This question focuses on the duration of the show and how it has changed and how the audience ratings have fluctuated as Power Rangers morphed.
+
+***2.Does the number of votes have a different effect on the IMDb rating on episodes with high or low ratings?***
+
+**Variables:** IMDB_rating, total_votes
+
+**Approach:** Divide episodes to see if it receives above median IMDb rating and below median IMDb rating, followed by investigating whether or not the relationship between votes and ratings differ between these two groups.
+
+**Scatter Plot with Facets:** Split it into two – make a scatter for episodes with more votes highest in the y-axis and a scatter for episodes with lower votes lowest in the y-axis.
+
+**Facet Grid:** One should utilize a facet grid and represent these two groups in one figure.
+
+**Objective:** This will allow us to see whether high vote episodes, positively skewed, make a difference on highly rated episodes compared to lowly rated ones.
+
+***3.Are there any seasons that have more episodes, and does this Sometimes, it is observed that such seasons receive higher ratings on average?***
+
+**Approach for Analysis:**
+
+**Numerical Variables:** episode_num (The number of the episode) IMDB_rating( IMDb rating)
+
+**Categorical Variable:** season_title (Season title)
+
+**Objective:**
+
+Our next question is about the correlation between the total number of episodes per season and the IMDb rating of the respective seasons. More particularly, the following research question has been formulated as follows: Do shows that broadcast more episodes per season compute higher or lower average IMDb ratings per episode?
+
+**Graphs to Use:**
+
+**Bar Plot for Episode Count**: A bar plot of the episodes per season will then give a general feel of which season is more episodes hence is longer.
+
+**Line Plot for Average IMDb Rating:** On top of the bar plot, line plot is intended to represent the mean of the IMDb rating for each season. It will also assist us make a direct comparison on the number of episodes and the average ratings obtained for each series.
+
+***4.Do Certain Seasons Have Higher Variation in IMDb Ratings?***
+
+**Variables:** season_title, IMDB_rating
+
+**Approach:** Compare the fluctuation in IMDb ratings of each season by calculating the standard deviation to find which the seasons have a greater variability or some episodes are considerably better or worse than others.
+
+**Visualization:**
+
+**Bar Plot with Error Bars:** Time series the mean IMDb rating for each of the seasons and standard error of the mean (variability).
+
+**Box Plot:** It also can be applied to show quantitatively the variability of ratings across the seasons of the show.
+
+**Objective:** This can show if potentially some seasons are more homogenised in terms of rating, or if perhaps a couple of particular seasons are either extremely high, or extremely low rated.
+
+## Analysis plan
+
+| **Task Name** | **Status** | **Assignee** | **Due Date** | **Priority** | **Summary** |
+|:-----------|:-----------|:-----------|------------|:-----------|:-----------|
+| **Data Cleaning & Preparation** | In Progress | Swetha | 09/18/2024 | High | Clean data (remove missing values, format dates, standardize variables like zord_type). |
+| **Exploratory Data Analysis (EDA)** | Pending | Naveen | 09/25/2024 | High | Explore basic statistics and distributions of Zord types, villain motivations, etc. |
+| **IMDb Ratings Evolution Over Time** | Pending | Aman | 09/30/2024 | Moderate | Analyze how IMDb ratings have changed across different eras of Power Rangers. Use line plots to compare ratings across early, middle, and modern seasons. |
+| **Effect of Total Votes on IMDb Ratings** | Pending | Krishna | 10/01/2024 | Moderate | Explore whether the number of votes impacts IMDb ratings differently for high-rated and low-rated episodes. Use scatter plots with facets to visualize this. |
+| **Episode Count vs. Average IMDb Rating** | Pending | Swetha | 10/01/2024 | Moderate | Investigate whether seasons with more episodes tend to have higher or lower IMDb ratings. Use a bar plot for episode counts and a line plot for average ratings. |
+| **Seasonal Variation in IMDb Ratings** | Pending | Naveen | 10/01/2024 | Moderate | Compare the variability of IMDb ratings across seasons to determine if some seasons are more consistent than others. Use bar plots with error bars and box plots. |
+| **Visualization Creation & Refinement** | Pending | Aman | 10/05/2024 | High | Refine all visualizations to create compelling, story-driven narratives. |
+| **Report Writing** | Pending | Krishna | 10/05/2024 | High | Compile findings into a cohesive report with visualizations and conclusions. |

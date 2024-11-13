@@ -4,12 +4,10 @@ format: html
 editor: visual
 ---
 
-This project was developed by **Seven Piece** For [INFO 526 - Data Analysis and Visualization](https://datavizaz.org/) at the University of Arizona, taught by Dr Anna Leach. The team is comprised of the following team members.
+This project was developed by **Data Detectivities** For [INFO 526 - Data Analysis and Visualization](https://datavizaz.org/) at the University of Arizona, taught by Dr Anna Leach. The team is comprised of the following team members.
 
 -   Kolloju Swetha: MS in Information Science - Machine Learning (2023-2025)
 
--  Naveen: MS in Information Science - Machine Learning (2023-2025)
+-  Hema: MS in Information Science - Machine Learning (2023-2025)
 
--   Krishna: MS in Data Science (2023-2025)
-
--   Aman: MS in Information Science - Machine Learning (2023-2025)
+-   Aman Singh: MS in Information Science - Machine Learning (2023-2025)

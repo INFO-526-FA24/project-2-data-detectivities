@@ -21,75 +21,95 @@ execute:
   warning: false
 ---
 
-## Dataset
+## ***Main Aim of the Project:***
 
-```{r}
-#| label: load-pkgs
-#| message: false
-# Load packages
+To analyze and identify trends, correlations, and patterns in mass shooting incidents across the United States based on time, location, demographics, and other relevant factors, providing insights that could aid in public safety measures and policy considerations.
 
-# Check and install necessary packages
-check_and_install("tidyverse")
-check_and_install("dplyr")
+## ***Project Goals:***
 
+This project aims to uncover key trends in mass shooting incidents, including patterns over time, geographic areas most affected, and correlations between shooter characteristics and the severity or frequency of these events. Given the growing number of incidents, gaining a clearer understanding of contributing factors and patterns could be valuable for both researchers and policymakers.
 
-file_path = "data/power_rangers_episodes.csv"
+The project will involve an in-depth analysis using multiple datasets, each with detailed information on incidents, including fatalities, injuries, shooter demographics, mental health indicators, weapon acquisition details, and possible motivations. By examining correlations between these variables and incident severity, the goal is to identify potential insights for predictive modeling and public safety recommendations.
 
-rangers = read.csv(file = file_path)
+## ***Reason of choosing :***
 
-# Display basic information about the dataset
-dim(rangers)  
-glimpse(rangers)  
-summary(rangers) 
-```
+The dataset was chosen because it provides a uniquely detailed view of mass shooting incidents in the U.S., enabling an in-depth analysis of trends over time and geography. It includes comprehensive data on shooter demographics, incident locations, and outcomes (fatalities and injuries), as well as factors like shooter motivation and weapon acquisition. This variety allows for nuanced, multidimensional insights, such as exploring correlations between shooter characteristics and incident severity or identifying high-risk times and locations. Additionally, the dataset’s structure supports advanced visualization methods that can bring clarity to complex patterns, making it ideal for a thorough and visually compelling exploration of mass shooting trends and contributing factors.
 
-A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
+## *Dataset*
 
-Make sure to load the data and use inline code for some of this information.'
+Incidents Dataset (mass_killing_incidents_public.csv):
 
-**Dataset Description:**
+***Key Variables:***
 
-The dataset consists of various key attributes:
+-   Date and Location: date, city, state, county, longitude, latitude
 
-**Season Title**: Name of the season .
+-   Casualties: num_victims_killed, num_victims_injured Incident Type: type (e.g., "Family", "Public"), situation_type, location_type (e.g., "Residence/Other shelter")
 
-**Episode Number**: The chronological number of the episode within the season.
+-   Weapon Details: if_assault_rifle_used (whether an assault rifle was used)
 
-**Episode Title**: Name of the episode.
+-    Narrative: narrative (provides additional context in free text)
 
-**Air Date**: Date the episode was first broadcast.
+Offenders Dataset (mass_killing_offenders_public.csv):
 
-**IMDb Rating**: The rating of the episode as voted by users on IMDb.
+***Key Variables:***
 
-**Total Votes**: The number of votes the episode received.
+-   Demographics: age, race, sex
 
-**Description**: A brief synopsis of the episode's plot.
+-    Outcomes: suicide (whether the offender committed suicide), deathcause (cause of death), outcome (legal or fatality outcome)
 
-***Reason for choosing the dataset:***
+-    Criminal Justice Process: criminal_justice_process, sentence_type, sentence_details
 
-The Power Rangers are heroes in brightly colored costumes who fights evil; they embody the values of togetherness, ethnic and racial diversity and integrity, and have become a beloved children's franchise for over three decades. For choosing this particular dataset we want to reveal the evolution of the action-packed show and how it became very much a part of many generations.\
-\
-What we have to explore is what is the fundamental story that has been sustaining this franchise for the past few decades. We very much like to delve into the subtext with rainbows, sparkles and high kicks -- what Power Rangers really explains is the importance of friendship, togetherness and conquering one's fears. Most importantly, it would be interesting to find out what roles and positions the heroes have shifted to, what positions have been accentuated in new storylines; whether it is possible to speak about the continuity of such narrative themes as the theme of mentorship, sacrifice, or leadership.\
-\
-In other words, we desire to know why Power Rangers is still going strong after many seasons. That's what continues to attract the viewership? I think that is an interesting question to pose when analyzing four different heroes in this case -- Batman, Superman, Wonder Woman and Aquaman -- because one could argue that all of these heroes have gone through some form of development. What did the franchise remember and what did it learn -- those values which have remained forever relevant, and what new values the franchise got while adapting to the world of the twenty-first century?
+Victims Dataset (mass_killing_victims_public.csv):
+
+***Key Variables:***
+
+-   Victim Demographics: age, race, sex
+
+-   Relationship with Shooter: vorelationship (relationship of the victim to the shooter, e.g., "Family", "Acquaintance", "Other")
+
+Weapons Dataset (mass_killing_weapons_public.csv):
+
+**Key Variables:**
+
+-   Weapon Type: weapon_type (e.g., "gun", "blunt object")
+
+-   Gun Class and Type: gun_class (e.g., "LG" for long gun, "HG" for handgun), gun_type (e.g., "semiautomatic handgun")
 
 ## Questions and Analysis plan
 
-The two questions you want to answer.
+The questions we want to answer.
 
-***1.In what ways does rating on IMDb change from one era of Power Rangers to another?***
+***1.What are the trends in mass shooting incidents over time, and how do they vary geographically across the U.S.? Which states, cities, and incident areas have been most affected?***
 
-**Variables**: air date, IMDB rating, title of the season
+***Objective:***
 
-**Approach:** Categorize the episodes into the first five seasons, middle seasons, and the latter seasons, then, compare the ratings from IMDb over such season sections.
+To identify patterns in the frequency, severity, and geographical spread of mass shootings. Analyze incident distribution by state, city, and specific incident locations over time.
 
-**Visualization:**
+***Approach:***
 
-**Line Plot:** Graph facilities the ratings obtained from IMDb with different colors concerning each era of Power Rangers.
+-   Data: mass_killing_incidents_public.csv.
 
-**Annotations:** Use squiggly lines to signify that there is something of importance to come such as new characters or new formats.
+**Variables:**
 
-**Objective:** This question focuses on the duration of the show and how it has changed and how the audience ratings have fluctuated as Power Rangers morphed.
+-   Time-based variables: Year, month, day of week.
+
+-   Geographic variables: State, city, incident area .
+
+-    Outcome variables: Number of fatalities, number of injuries.
+
+***Analytical Steps:***
+
+-   Filtering and grouping data by year to identify annual trends in the number of incidents.
+
+-   Analyze incident frequencies by state and city to find the most affected regions. Identify time patterns.
+
+***Visualizations:***
+
+-   Line Charts: For trend analysis of annual fatalities and injuries.
+
+-    Heatmaps: To show incidents by day of the week or by month, which can highlight high-incident periods.
+
+-   Geographic Maps: Use ggplot2 with sf or maps package to plot incident locations and highlight areas with the highest frequency.
 
 ***2.Does the number of votes have a different effect on the IMDb rating on episodes with high or low ratings?***
 

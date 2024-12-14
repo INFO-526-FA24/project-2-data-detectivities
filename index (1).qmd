@@ -1,0 +1,671 @@
+---
+title: "Analysis of USA Mass Shootings"
+subtitle: "INFO 526 - Fall 2024 - Project 02"
+author: 
+  - name: "Data Detectives"
+    affiliations:
+      - name: "School of Information, University of Arizona"
+Introduction: " Mass shootings in the United States have become a critical issue, profoundly affecting communities and raising urgent questions about public safety, gun laws, and the societal factors behind these tragic events. To address these concerns, a deeper understanding of the patterns and characteristics of mass shootings is essential.  
+
+This project uses a comprehensive dataset to analyze mass killings in the United States. The dataset provides detailed information about each incident, including the date, location, number of victims, offender profiles, and weapon types. By examining this data, the study seeks to uncover trends and relationships that can shed light on the factors driving these incidents.  
+
+The goal of this analysis is to offer meaningful insights into the dynamics of mass shootings. By identifying patterns and exploring potential influences, the findings aim to support informed discussions and initiatives focused on reducing the frequency and impact of these devastating events."
+format:
+   html:
+    code-tools: true
+    code-overflow: wrap
+    embed-resources: true
+editor: visual
+execute:
+  warning: false
+  echo: false
+---
+
+## Abstract
+
+::: {style="text-align: justify;"}
+Mass shootings represent one of the most pressing and tragic societal issues in the United States. These events have far-reaching implications, impacting victims, families, communities, and the nation's collective psyche. Understanding the factors contributing to mass shootings, their patterns, and their consequences is vital for policymakers, researchers, and the public. By analyzing trends in mass shootings, we aim to provide data-driven insights that could aid in developing preventative measures, informing public policy, and fostering greater awareness of this complex issue.
+
+This project focuses on the systematic analysis of mass shooting incidents in the USA. By leveraging a detailed dataset, we aim to uncover temporal trends, geographic patterns, characteristics of shooters, and external factors that may correlate with these incidents. Through a rigorous and structured approach to data analysis, this study seeks to shed light on the underlying dynamics of mass shootings, helping to transform raw data into meaningful knowledge.
+:::
+
+## Why this Dataset???
+
+::: {style="text-align: justify;"}
+The selection of this dataset was guided by its comprehensiveness, relevance, and credibility. The dataset offers detailed information on mass shooting incidents in the United States, including key variables such as the location of the incidents, timeframes, victim counts, shooter characteristics, and associated motives or circumstances. Such depth allows for a nuanced analysis of the factors contributing to these tragic events.
+
+Additionally, this dataset is particularly suitable for the project's objectives due to its structure, enabling both statistical analysis and advanced visualizations. It provides a robust foundation for identifying patterns, evaluating correlations, and uncovering trends that may not be immediately apparent through anecdotal evidence or smaller-scale studies. The dataset’s historical span and granularity are critical for addressing the research questions posed in this project.
+
+By selecting a dataset of high quality and reliability, we ensure that the insights derived from this analysis are well-founded and can contribute meaningfully to ongoing discussions surrounding gun violence and mass shootings.
+:::
+
+## Dataset Overview
+
+::: {style="text-align: justify;"}
+The dataset is organized into four distinct CSV files, each containing specific aspects of mass killing incidents in the USA. Below is an explanation of each file and its variables:
+
+#### **1. `mass_killing_incidents_public.csv`**
+
+This file provides a comprehensive overview of each mass killing incident, including geographic, temporal, and contextual details.
+
+-   **Variables and Their Significance**:
+
+    -   **`incident_id`**: Unique identifier for each incident, linking it to other files.
+
+    -   **`date`**: Date of the incident, allowing temporal trend analysis.
+
+    -   **`city`** and **`state`**: Geographic location of the incident for spatial analysis.
+
+    -   **`num_offenders`**: Number of perpetrators involved in the incident.
+
+    -   **`num_victims_killed`**: Total fatalities, reflecting the severity of the incident.
+
+    -   **`num_victims_injured`**: Total injured, providing insight into the impact beyond fatalities.
+
+    -   **`firstcod`** and **`secondcod`**: Cause of death details for victims.
+
+    -   **`if_assault_rifle_used`**: Indicates whether an assault rifle was used, relevant to gun policy discussions.
+
+    -   **`type`**: Type of incident (e.g., mass shooting, domestic violence-related).
+
+    -   **`situation_type`**: Context of the incident (e.g., targeted, random).
+
+    -   **`location_type`** and **`location`**: Details about the setting of the incident (e.g., school, workplace).
+
+    -   **`longitude`** and **`latitude`**: Geographic coordinates for mapping incidents.
+
+    -   **`county`** and **`census_tract_geoid`**: Administrative and demographic identifiers, enabling demographic correlations.
+
+    -   **`narrative`**: Brief description of the incident, offering qualitative insights.
+
+#### **2. `mass_killing_offenders_public.csv`**
+
+This file contains data about the offenders, providing insight into their demographics and outcomes.
+
+-   **Variables and Their Significance**:
+
+    -   **`incident_id`**: Links offenders to specific incidents in the dataset.
+
+    -   **`offender_id`**: Unique identifier for each offender.
+
+    -   **`firstname`, `middlename`, `lastname`, `suffix`**: Personal identifiers for the offenders.
+
+    -   **`age`**: Age of the offender, aiding in demographic studies.
+
+    -   **`race`**: Racial background of the offender.
+
+    -   **`sex`**: Gender of the offender.
+
+    -   **`suicide`**: Indicates whether the offender died by suicide during the incident.
+
+    -   **`deathcause`**: Cause of death if the offender is deceased.
+
+    -   **`outcome`**: Judicial or other outcomes of the incident for the offender (e.g., arrest, death).
+
+    -   **`criminal_justice_process`**: Status of criminal justice proceedings.
+
+    -   **`sentence_type`** and **`sentence_details`**: Details of sentencing if applicable.
+
+#### **3. `mass_killing_victims_public.csv`**
+
+This file focuses on victims, offering demographic information and their relationship to the offenders.
+
+-   **Variables and Their Significance**:
+
+    -   **`incident_id`**: Links victims to specific incidents.
+
+    -   **`victim_id`**: Unique identifier for each victim.
+
+    -   **`age`**: Age of the victim, aiding in analyzing which age groups are most affected.
+
+    -   **`race`**: Racial background of the victim.
+
+    -   **`sex`**: Gender of the victim.
+
+    -   **`vorelationship`**: Relationship between the victim and offender, providing insight into the dynamics of the incident (e.g., stranger, family member).
+
+#### **4. `mass_killing_weapons_public.csv`**
+
+This file documents the weapons used during each incident, an essential factor in understanding the role of firearms.
+
+-   **Variables and Their Significance**:
+
+    -   **`incident_id`**: Links weapons data to specific incidents.
+
+    -   **`weapon_id`**: Unique identifier for each weapon.
+
+    -   **`weapon_type`**: General type of weapon used (e.g., firearm, knife).
+
+    -   **`gun_class`**: Classification of guns, such as semi-automatic or automatic, relevant to discussions about gun control policies.
+
+    -   **`gun_type`**: Specific type of gun used (e.g., handgun, rifle).
+
+### **Key Features of the Dataset**
+
+1.  **Multi-Dimensional**: Each file represents a different dimension of the incidents—geographic, offender, victim, and weapon-related details.
+
+2.  **Rich Contextual Variables**: Variables like `narrative`, `location`, `vorelationship`, and `type` offer qualitative insights into the incidents.
+
+3.  **Inter-File Linkages**: Common `incident_id` across files ensures seamless integration and deeper analysis.
+
+```{r}
+### Q1:  1.What are the trends in mass shooting incidents over time, and how do they vary geographically across the U.S.? Which states, cities, and incident areas have been most affected?
+
+### Introduction
+### In this analysis, we aim to explore the temporal and geographic trends in mass shooting incidents across the United States. The objective is to understand how these incidents have evolved over time, identifying any significant trends or shifts in their frequency, and to determine the regions most impacted by these events. Specifically, we seek to answer the following:
+
+#How have mass shooting incidents varied across different years?
+#Which years have witnessed the highest or lowest number of incidents?
+#What geographic regions (states, cities, and locations) have been most affected by these incidents?
+#To address this question, we have used a combination of data aggregation, trend analysis, and visualizations. The analysis focuses primarily on the temporal trends over the years and provides insights into the geographic distribution of incidents based on the available data.
+
+
+### Approach
+
+#To address the research questions, the following steps were taken:
+
+#1. Dataset:
+  # - The analysis utilizes the `mass_killing_incidents_public.csv` dataset, which provides detailed records of mass shooting incidents in the U.S., including information such as date, location, and state of occurrence.
+
+#2. Temporal Analysis:
+   #- Yearly trends in mass shootings were analyzed by extracting the year from the incident dates. The incidents were grouped by year to identify patterns over time, with visualizations created to highlight these trends.
+
+#3. Geographical Analysis:
+   #- The dataset’s state-level data was used to map the distribution of incidents across the U.S. States were ranked by the number of incidents, and the top 10 most affected states were identified.
+
+#4. Visualizations:
+   #- Line plots were employed to display yearly trends, with smoothing techniques applied to reveal underlying patterns.
+   #- A heatmap of the U.S. was created to depict the geographic concentration of incidents, complemented by detailed mini-maps for the top 10 states to provide a closer look at the most impacted regions.
+
+#This approach ensures a comprehensive understanding of the temporal and spatial dynamics of mass shooting incidents in the U.S.
+
+#Code:
+  
+  
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(usmap)
+library(ggpubr)
+
+# Load the data
+incidents <- read.csv("mass_killing_incidents_public.csv", stringsAsFactors = FALSE)
+
+# Convert date column to Date type
+incidents$date <- as.Date(incidents$date)
+
+# Extract year for trend analysis
+incidents$year <- year(incidents$date)
+
+yearly_trends <- incidents %>%
+  group_by(year) %>%
+  summarise(incidents_count = n())
+
+# Improved Yearly Trends Plot with uniform axis scaling
+yearly_trend_plot <- ggplot(yearly_trends, aes(x = year, y = incidents_count)) +
+  geom_line(color = "steelblue", size = 1) +
+  geom_point(color = "red", size = 2) +
+  geom_smooth(method = "loess", color = "darkblue", fill = "gold", alpha = 0.3) +
+  labs(title = "Yearly Trends in Mass Shooting Incidents (Smoothed)",
+       subtitle = "Red points indicate actual data; blue line shows overall trend",
+       x = "Year",
+       y = "Number of Incidents") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16),
+    plot.subtitle = element_text(hjust = 0.5, size = 12),
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 12)
+  ) +
+  scale_x_continuous(limits = c(2005, NA)) +  # Set x-axis from 2005
+  scale_y_continuous(limits = c(0, NA))        # Set y-axis from 0
+
+# Display the improved yearly trend plot
+print(yearly_trend_plot)
+
+
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(usmap)
+library(ggrepel)
+library(maps)
+library(gridExtra)
+
+# Load the data
+incidents <- read.csv("mass_killing_incidents_public.csv", stringsAsFactors = FALSE)
+
+# Convert state names to uppercase for consistency
+incidents$state <- toupper(incidents$state)
+
+# Map state names and abbreviations
+state_mapping <- data.frame(
+  state_name = state.name,
+  state_abbr = state.abb,
+  stringsAsFactors = FALSE
+)
+
+# Prepare state-level data
+state_distribution <- incidents %>%
+  count(state) %>%
+  rename(abbr = state, incidents_count = n) %>%
+  left_join(state_mapping, by = c("abbr" = "state_abbr")) %>%
+  filter(!is.na(state_name)) %>%
+  rename(state = state_name)
+
+# Extract top 10 states
+top_states <- state_distribution %>%
+  arrange(desc(incidents_count)) %>%
+  top_n(10, incidents_count)
+
+# Get state centroids using 'maps' package
+state_centroids <- map_data("state") %>%
+  group_by(region) %>%
+  summarise(
+    lat = mean(lat),
+    lon = mean(long)
+  ) %>%
+  rename(state = region)
+
+# Join the centroids with the top states data
+top_states <- top_states %>%
+  left_join(state_centroids, by = "state")
+
+# Create the USA map with top 10 states highlighted
+usa_map <- plot_usmap(data = state_distribution, values = "incidents_count", color = "black") +
+  scale_fill_gradient(name = "Incidents Count", low = "yellow", high = "red") +
+  labs(title = "Mass Shooting Incidents Across the USA",
+       subtitle = "Highlighting the Top 10 States Most Affected") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size =12 ),
+        plot.subtitle = element_text(hjust = 0.5, size = 10))
+
+# Add pointers for the top 10 states
+usa_map_with_pointers <- usa_map +
+  geom_point(data = top_states, aes(x = lon, y = lat), color = "red", size =8 ) +
+  geom_label_repel(data = top_states,
+                   aes(x = lon, y = lat, label = state),
+                   size = 5, fill = "white", color = "black", fontface = "bold")
+
+# Create smaller state maps for the top 10 states
+state_maps <- lapply(seq_along(top_states$state), function(i) {
+  state_name <- top_states$state[i]
+  incidents_count <- top_states$incidents_count[i]
+  
+  ggplot() +
+    geom_polygon(data = map_data("state", region = tolower(state_name)),
+                 aes(x = long, y = lat, group = group),
+                 fill = scales::col_numeric(c("yellow", "red"), c(1, max(state_distribution$incidents_count)))(incidents_count),
+                 color = "black") +
+    coord_fixed() +
+    labs(title = state_name, subtitle = paste("Incidents:", incidents_count)) +
+    theme_void() +
+    theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+          plot.subtitle = element_text(hjust = 0.5, size = 12))
+})
+
+# Arrange maps in side-by-side layout
+left_maps <- do.call(grid.arrange, c(state_maps[1:5], ncol = 1))
+right_maps <- do.call(grid.arrange, c(state_maps[6:10], ncol = 1))
+
+# Combine the USA map and side state maps
+grid.arrange(
+  grobs = list(left_maps, usa_map_with_pointers, right_maps),
+  ncol = 3,
+  widths = c(1, 2, 1)
+)
+
+
+
+### Graph 1: Yearly Trends in Mass Shooting Incidents (Smoothed)
+
+#1. Overview:
+   #- This graph shows the yearly trends in mass shooting incidents from around 2005 to 2023.
+   #- The actual yearly incident data points are marked in red.
+   #- The solid blue line represents the overall trend, smoothed using a LOESS method to highlight underlying patterns.
+   #- The yellow shaded area shows the confidence interval around the smoothed trend.
+
+#2. Key Observations:
+   #- 2005–2010: There is an initial decline in the number of incidents, reaching the lowest point around 2010.
+   #- 2011–2017: The number of incidents begins to gradually increase during this period, as indicated by the upward slope of the smoothed trend line.
+   #- 2018–2020: A notable fluctuation is observed where incidents sharply rise and fall, but the overall trend still reflects an upward trajectory.
+   #- 2021–2023: The trend stabilizes at a higher level compared to earlier years, although slight variability remains.
+
+#3. Significance:
+ #  - The overall trend indicates that mass shooting incidents have increased over the years despite fluctuations.
+ #  - The confidence band (yellow area) widens as we move towards more recent years, suggesting higher uncertainty in recent data, possibly due to incomplete reporting or variability.
+
+
+
+### Graph 2: Mass Shooting Incidents Across the USA (Top 10 States Highlighted)
+
+#1. Overview:
+   #- This map visualizes the geographic distribution of mass shooting incidents across the U.S., highlighting the top 10 most affected states.
+  # - States are color-coded based on incident counts: 
+   #  - Red represents the highest incident count.
+    # - Orange and yellow represent states with moderate to lower incident counts.
+
+#2. Key Observations:
+ #  - Top 10 States:
+  #   - California is the most affected state with 67 incidents, depicted in dark red.
+   #  - Other highly impacted states include Texas (51 incidents) and Illinois (36 incidents).
+   #  - Florida, Ohio, and New York also report high incident counts ranging from 25 to 33 incidents.
+   #- Regional Patterns:
+    # - The West Coast (California) and Southern regions (Texas and Florida) are particularly affected.
+     #- The Midwest (Illinois and Ohio) also experiences a significant number of incidents.
+     #- Eastern states, including New York and Georgia, show moderate but notable impacts.
+
+#3. State-Specific Insets:
+ #  - On the left and right sides of the map, detailed visualizations of the top 10 states are provided, displaying their geographic boundaries and incident counts.
+  # - This helps highlight the concentration of incidents in each state more clearly.
+
+#4. Significance:
+ #  - The map highlights states where policy interventions and resources could be prioritized to address the higher frequency of incidents.
+  # - California and Texas, being the most affected, warrant special focus for further investigation into potential causes and preventive measures.
+
+
+### Conclusion
+
+#From the two visualizations:
+#1. Temporal Trends:
+ #  - Mass shooting incidents have generally increased over time, particularly from 2011 onward, despite yearly fluctuations.
+  # - This upward trend suggests a growing problem that requires attention.
+
+#2. Geographic Distribution:
+ #  - California, Texas, and Illinois emerge as the most affected states, with California reporting the highest number of incidents.
+ #  - Incident hotspots appear concentrated in Western, Southern, and parts of the Midwest and Eastern U.S..
+
+#The analysis highlights a clear temporal increase and regional concentration of mass shooting incidents. Policymakers, law enforcement, and researchers should focus on understanding the causes behind these patterns and implementing targeted interventions, particularly in highly affected regions.
+```
+:::
+
+```{r}
+### 2.Which shooter characteristics—such as demographics, mental health status, age, employment, and weapon acquisition method—correlate with the severity and frequency of mass shootings?
+
+## Introduction
+
+#In this analysis, we seek to explore the relationship between various shooter characteristics (such as demographics, mental health status, age, employment, and weapon acquisition method) and the severity and frequency of mass shootings. By examining these variables, we aim to identify patterns that can provide insights into how these factors correlate with the number of victims and the severity of the incidents.
+
+#Specifically, we are interested in answering the following questions:
+
+#How does the shooter's age influence the number of victims killed?
+#What role do weapon types (e.g., assault rifles) play in the severity of mass shootings?
+#How does the shooter's race interact with weapon class in determining the number of victims?
+#What is the proportion of shooters who commit suicide, and does this correlate with incident severity?
+#To address these questions, we use data from multiple sources, which are then merged and preprocessed for analysis. Visualizations, such as correlation matrices and plots, are created to highlight significant trends and patterns.
+
+#Approach
+#1. Dataset
+#The analysis utilizes four datasets:
+
+#mass_killing_incidents_public.csv: Contains information about the incident, including the number of victims and weapon types.
+#mass_killing_offenders_public.csv: Contains shooter details, including demographics (age, race, sex) and mental health status (suicide).
+#mass_killing_victims_public.csv: Contains information about the victims.
+#mass_killing_weapons_public.csv: Contains details about the weapons used in the incidents.
+#2. Data Merging
+#The datasets are merged based on the incident_id, combining data from all relevant sources into a single dataset that includes incident, offender, victim, and weapon information.
+
+#3. Data Preprocessing
+#Key variables, such as the number of victims killed, the shooter's age, race, sex, suicide status, and weapon details, are selected for analysis.
+#Categorical variables (such as race and sex) are converted to factors, and missing values are dropped.
+#4. Correlation Analysis
+#A correlation matrix is generated to examine the relationships between numeric variables (e.g., age, number of victims killed, and number of victims injured).
+#The matrix helps to identify any strong correlations that can guide further analysis.
+#5. Visualizations
+#Correlation Matrix: Displays the relationships between numeric variables (such as age and number of victims killed), highlighting patterns.
+#Shooter's Age vs. Number of Victims Killed: A scatter plot is created to examine how the shooter's age correlates with the severity of the incident, with a focus on whether assault rifles were used.
+#Weapon Types: A bar plot displays the distribution of weapon types used in mass shootings, segmented by whether an assault rifle was used.
+#Victim Count by Race and Weapon Class: A box plot is used to compare the number of victims killed across different races and weapon classes, helping to identify any trends related to the shooter's race and weapon choice.
+#Proportion of Suicides Among Shooters: A bar plot illustrates the proportion of shooters who committed suicide, providing insights into the mental health status of shooters and its potential link to incident severity.
+  
+#COde:
+  
+# Load necessary libraries
+library(tidyverse)
+library(ggcorrplot)
+library(ggplot2)
+
+# Load datasets
+incidents <- read.csv("mass_killing_incidents_public.csv")
+offenders <- read.csv("mass_killing_offenders_public.csv")
+victims <- read.csv("mass_killing_victims_public.csv")
+weapons <- read.csv("mass_killing_weapons_public.csv")
+
+# Check column names of each dataset
+cat("Columns in incidents:\n")
+print(colnames(incidents))
+cat("Columns in offenders:\n")
+print(colnames(offenders))
+cat("Columns in victims:\n")
+print(colnames(victims))
+cat("Columns in weapons:\n")
+print(colnames(weapons))
+
+# Merge datasets
+merged_data <- incidents %>%
+  left_join(offenders, by = "incident_id") %>%
+  left_join(victims, by = "incident_id") %>%
+  left_join(weapons, by = "incident_id")
+
+# Verify column names of merged_data
+cat("Columns in merged_data:\n")
+print(colnames(merged_data))
+
+# Data preprocessing: Focus on key variables and handle missing data
+analysis_data <- merged_data %>%
+  select(
+    num_victims_killed, num_victims_injured, age = age.x, race = race.x, sex = sex.x,
+    suicide, if_assault_rifle_used, gun_type, gun_class
+  ) %>%
+  mutate(across(where(is.character), as.factor)) %>%
+  drop_na()
+
+# Correlation matrix for numeric variables
+numeric_data <- analysis_data %>%
+  select(num_victims_killed, num_victims_injured, age) %>%
+  na.omit()
+cor_matrix <- cor(numeric_data)
+
+# Plot correlation matrix
+ggcorrplot(cor_matrix, method = "circle", lab = TRUE, lab_size = 3, title = "Correlation Matrix")
+
+# Visualization 1: Impact of shooter's age on severity
+ggplot(analysis_data, aes(x = age, y = num_victims_killed)) +
+  geom_point(aes(color = if_assault_rifle_used)) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Shooter's Age vs Number of Victims Killed",
+    x = "Shooter's Age",
+    y = "Number of Victims Killed",
+    color = "Assault Rifle Used"
+  ) +
+  theme_minimal()
+
+# Visualization 2: Distribution of weapon types used
+ggplot(analysis_data, aes(x = gun_type, fill = if_assault_rifle_used)) +
+  geom_bar() +
+  coord_flip() +
+  labs(
+    title = "Distribution of Weapon Types",
+    x = "Gun Type",
+    y = "Count",
+    fill = "Assault Rifle Used"
+  ) +
+  theme_minimal()
+
+# Visualization 3: Victim count by race and weapon class
+ggplot(analysis_data, aes(x = race, y = num_victims_killed, fill = gun_class)) +
+  geom_boxplot() +
+  labs(
+    title = "Victim Count by Shooter's Race and Weapon Class",
+    x = "Shooter's Race",
+    y = "Number of Victims Killed",
+    fill = "Gun Class"
+  ) +
+  theme_minimal()
+
+# Visualization 4: Proportion of suicides among shooters
+ggplot(analysis_data, aes(x = suicide, fill = suicide)) +
+  geom_bar() +
+  labs(
+    title = "Proportion of Suicides Among Shooters",
+    x = "Suicide",
+    y = "Count",
+    fill = "Suicide"
+  ) +
+  theme_minimal()
+
+
+#Discussion:
+#The first graph is a correlation matrix showing the relationships between shooter’s age, the number of victims injured, and the number of victims killed. There is a very strong positive correlation (0.95) between the number of victims killed and injured, indicating that when more victims are killed, more are also likely injured. Shooter's age has a moderate positive correlation (0.72–0.78) with both the number of victims injured and killed, suggesting a slight tendency for older shooters to cause more harm. The darker red and larger circles highlight stronger positive correlations.
+
+#The second graph is a scatter plot showing the relationship between shooter’s age and the number of victims killed, with data points categorized by weapon type. Most points are concentrated at lower victim counts, but a few outliers with higher casualties exist, especially for younger shooters using AR-15 style rifles. The blue trend line shows a positive relationship between age and the number of victims killed, but the relationship is weak overall due to the spread of data points. This suggests that while there is a general upward trend, the number of victims killed is highly variable across ages.
+
+#The third graph shows the distribution of weapon types used in incidents, with bars categorized by weapon type and color-coded to indicate if an AR-15 style rifle, another type of gun, or unknown gun type was used. The **semiautomatic rifle** and **automatic handgun** categories have the highest counts, with AR-15 style rifles contributing significantly to the semiautomatic rifle group. Handguns and semiautomatic handguns are also prominent but are primarily categorized as non-assault rifles (green). The "unknown gun type" category has a notable presence in automatic handguns (pink), suggesting missing or incomplete weapon information. This graph highlights the prevalence of specific weapon types, particularly semiautomatic and automatic firearms, in incidents.
+
+#Conculsion
+#Based on the analysis, shooter characteristics such as age and weapon type show notable correlations with the severity of mass shootings. The correlation matrix indicates a moderate positive relationship between shooter age and the number of victims injured or killed, suggesting older shooters tend to cause slightly more casualties. However, the scatter plot reveals variability, with outliers—particularly younger shooters using AR-15 style rifles—causing disproportionately high fatalities. The distribution of weapon types highlights that semiautomatic rifles and automatic handguns are the most commonly used weapons, with AR-15 style rifles playing a significant role in incidents with high victim counts. While demographic data like age shows trends, weapon acquisition methods, mental health status, and employment data would require further analysis to fully understand their correlation with both the frequency and severity of mass shootings.
+
+```
+
+```{r}
+# # Q3)Are there specific temporal patterns in mass shootings, such as trends across days of the week, months, or seasons, that could provide insights for prediction models or inform public safety measures?
+
+# Introduciton:
+
+#### Introduction
+
+#In this analysis, we aim to explore the temporal patterns of mass shooting incidents, focusing on trends across different days of the week, months, and seasons. By identifying these patterns, we hope to uncover insights that could inform predictive models or guide public safety measures. Specifically, we seek to answer the following questions:
+
+#- Are there specific days of the week with higher frequencies of mass shooting incidents?
+#- Do certain months or seasons exhibit a higher concentration of mass shootings?
+#- How might these temporal patterns be used to improve prediction models or influence policy?
+
+#To address these questions, we use a combination of temporal data analysis and visualizations. The goal is to identify any significant trends in the occurrence of mass shootings across time, allowing us to make informed conclusions about the potential for predictive modeling or the need for targeted safety measures.
+
+### Approach
+
+#To address the research questions, the following steps were taken:
+
+#1. Dataset:
+  # - The analysis utilizes the `mass_killing_incidents_public.csv` dataset, which contains detailed records of mass shooting incidents, including the date of occurrence. This data allows us to explore the temporal aspects of these incidents.
+
+#2. Data Cleaning and Temporal Feature Extraction:
+  # - The dataset was cleaned, and temporal features were extracted from the incident dates, including the day of the week, month, year, and season. These features provide a foundation for exploring trends over time.
+
+#3. Circular Calendar Plot:
+ #  - A circular calendar plot was created to visualize the distribution of mass shootings by day of the week and month. This plot helps to identify if any days or months show consistently higher frequencies of incidents.
+
+#4. Enhanced Chord Diagram:
+ #  - An enhanced chord diagram was used to examine the flow between seasons and days of the week. This visualization provides a deeper look at how different seasons are related to specific days, helping to uncover any seasonal patterns in mass shootings.
+
+#5. Visualizations:
+  # - The circular calendar plot highlights the distribution of incidents across time, offering insights into whether specific days or months are more likely to witness mass shootings.
+  # - The chord diagram illustrates the connections between seasons and days of the week, revealing potential seasonal patterns that could inform policy or prediction efforts.
+
+#This approach ensures a comprehensive understanding of the temporal dynamics of mass shooting incidents, providing valuable insights that could guide public safety strategies or inform predictive models.
+
+#Code:
+
+# Load necessary libraries
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+library(viridis)
+library(circlize)
+
+# Step 1: Load the dataset
+incidents <- read.csv("mass_killing_incidents_public.csv")
+
+# Step 2: Data Cleaning and Preparation
+# Ensure the `date` column is in Date format and extract temporal features
+incidents <- incidents %>%
+  mutate(
+    date = as.Date(date, format = "%Y-%m-%d"), # Convert to Date type
+    day_of_week = wday(date, label = TRUE, abbr = FALSE), # Day of the week (e.g., Monday)
+    month = month(date, label = TRUE, abbr = FALSE), # Month (e.g., January)
+    year = year(date), # Year (e.g., 2023)
+    season = case_when( # Extract seasons
+      month %in% c("December", "January", "February") ~ "Winter",
+      month %in% c("March", "April", "May") ~ "Spring",
+      month %in% c("June", "July", "August") ~ "Summer",
+      month %in% c("September", "October", "November") ~ "Fall"
+    )
+  ) %>%
+  drop_na(date) # Remove rows with missing dates
+
+# ---- Circular Calendar Plot: Monthly and Daily Distribution ----
+incidents %>%
+  count(month, day_of_week) %>%
+  ggplot(aes(x = day_of_week, y = n, fill = month)) +
+  geom_bar(stat = "identity", show.legend = FALSE) +
+  coord_polar(start = 0) + # Circular plot
+  scale_fill_viridis_d() +
+  labs(
+    title = "Circular Calendar Plot: Mass Shootings by Day of the Week and Month",
+    x = "Day of the Week",
+    y = "Frequency"
+  ) +
+  theme_minimal()
+
+# ---- Enhanced Chord Diagram: Flow Between Seasons and Days ----
+# Prepare the data for the Chord Diagram
+season_day_counts <- incidents %>%
+  count(season, day_of_week)
+
+# Reshape data into a matrix
+chord_data <- season_day_counts %>%
+  spread(day_of_week, n, fill = 0)
+
+chord_matrix <- as.matrix(chord_data[, -1])
+rownames(chord_matrix) <- chord_data$season
+
+# Define colors for the chord diagram
+seasons_colors <- viridis::viridis(n = nrow(chord_matrix), option = "D")
+days_colors <- viridis::viridis(n = ncol(chord_matrix), option = "C")
+
+# Set sector-specific colors
+grid_colors <- c(seasons_colors, days_colors)
+names(grid_colors) <- c(rownames(chord_matrix), colnames(chord_matrix))
+
+# Draw the Chord Diagram
+circos.clear()  # Clear any previous plots
+chordDiagram(
+  chord_matrix,
+  annotationTrack = c("grid", "name"),  # Add grid and labels
+  transparency = 0.2,
+  grid.col = grid_colors,  # Custom colors
+  preAllocateTracks = list(track.height = 0.1)
+)
+
+# Add Title
+title("Enhanced Chord Diagram: Flow Between Seasons and Days of the Week")
+
+# Add Legend for Colors
+legend(
+  "topright",
+  legend = names(grid_colors),
+  fill = grid_colors,
+  border = "black",
+  title = "Seasons and Days of the Week",
+  cex = 0.8
+)
+
+### Detailed Explanation of the Graphs:
+
+#The Circular Calendar Plot shows the distribution of mass shootings across the days of the week in a circular format. The circle is divided into seven equal segments, each representing a day of the week, starting with Sunday and moving clockwise. The frequency of incidents is represented by the distance the bars extend from the center, where the center indicates zero frequency and the outermost part represents the maximum frequency. The graph makes it clear that Saturdays and Sundays have the highest number of mass shootings, as their bars extend further outward compared to the other days. The weekdays, particularly Wednesday and Thursday, show much shorter bars, indicating lower frequencies. The color gradient, which transitions from yellow near the center to dark purple towards the outer edge, further emphasizes the concentration of mass shootings, with weekends clearly standing out as peak days for such events.
+
+#The Enhanced Chord Diagram explores the relationship between seasons (Fall, Winter, Spring, and Summer) and the days of the week. The circular layout is split into two halves, with one side showing the four seasons and the other side representing the seven days of the week. The connections, shown as flowing chords, reveal patterns in mass shootings across time. The graph highlights that weekends, specifically Saturdays and Sundays, have strong connections to all four seasons, indicating that these days consistently experience more incidents throughout the year. Furthermore, the seasons Summer and Fall show particularly strong connections to weekends, suggesting that these two seasons see higher occurrences of mass shootings. This pattern could be linked to increased outdoor activities, gatherings, and favorable weather conditions during these months. On the other hand, weekdays such as Tuesday and Wednesday have fewer and thinner connections to seasons, reflecting lower incident frequencies.
+
+### Conclusion:
+
+#The two graphs together provide a detailed understanding of the temporal patterns in mass shootings. The Circular Calendar Plot shows that Saturdays and Sundays are the peak days for mass shootings, while weekdays see fewer incidents. The Enhanced Chord Diagram adds another layer by revealing that Summer and Fall are the seasons most associated with these events, particularly on weekends. These patterns suggest that weekends and warmer seasons are critical periods for public safety efforts, likely due to increased gatherings and outdoor activities. Identifying these trends can help inform preventive strategies, such as increasing law enforcement presence or public safety measures during high-risk times.
+
+
+```
+
+Conclusion
+
+This analysis provides valuable insights into the patterns and characteristics of mass shooting incidents in the United States. The study highlights an overall increase in incidents over the years, with weekends and the warmer months of summer and fall identified as high-risk periods. Geographic trends reveal California, Texas, and Illinois as the most affected states, with notable concentrations in the West Coast, Southern, and parts of the Midwest regions. These findings emphasize the need for targeted safety measures and policy interventions, particularly in high-incident areas and during peak times, to address the growing frequency of these events.
+
+Additionally, the analysis of shooter characteristics reveals key factors influencing the severity of incidents, such as age and weapon type. The use of semiautomatic firearms, including AR-15 style rifles, stands out as a significant contributor to the deadliest events. While older shooters tend to cause more casualties on average, younger shooters with access to high-powered weapons have also been involved in some of the most severe cases. These findings underscore the importance of addressing firearm access and considering mental health factors to better understand and mitigate the causes of mass shootings. By leveraging these insights, communities and policymakers can take steps toward reducing the occurrence and impact of such tragic events.
